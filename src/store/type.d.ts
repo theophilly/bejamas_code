@@ -10,7 +10,11 @@ export interface IArticle {
   };
   bestseller: boolean;
   featured: boolean;
-  details: object;
+  details: {
+    dimmensions: string;
+    description: string;
+    recommendations: [{ src: string; alt: string }];
+  };
 }
 
 export interface CartReducerType {
