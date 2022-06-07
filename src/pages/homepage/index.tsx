@@ -50,30 +50,28 @@ const Homepage: FunctionComponent<ComponentProps> = ({ products }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    //usually this endpoint will be in an env file, I only left it here since its not going public
-    const res = await fetch(
-      `https://bejamasproducts.herokuapp.com/fetch_products`
-    );
-    const data = await res.json();
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  //usually this endpoint will be in an env file, I only left it here since its not going public
+  const res = await fetch(
+    `https://bejamasproducts.herokuapp.com/fetch_products`
+  );
+  const data = await res.json();
 
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    }
-    await store.dispatch({
-      type: actionTypes.ON_FETCH_SUCCESS,
-      payload: {
-        products: data,
-      },
-    });
-
+  if (!data) {
     return {
-      props: { products: data },
+      notFound: true,
     };
   }
-);
+  await store.dispatch({
+    type: actionTypes.ON_FETCH_SUCCESS,
+    payload: {
+      products: data,
+    },
+  });
+
+  return {
+    props: { products: data },
+  };
+});
 
 export default Homepage;
