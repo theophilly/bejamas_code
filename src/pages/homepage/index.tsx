@@ -36,13 +36,9 @@ const Homepage: FunctionComponent<ComponentProps> = ({ products }) => {
         <meta name='keywords' content='next js bejamas, adeyemi kolade' />
         <meta property='og:title' content='The Rock' />
         <meta property='og:type' content='video.movie' />
-        <meta
-          property='og:url'
-          content='https://www.imdb.com/title/tt0117500/'
-        />
-        <meta
-          property='og:image'
-          content='https://ia.media-imdb.com/images/rock.jpg'
+        <link
+          href='https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&family=Source+Sans+Pro:wght@300;400;600;700&display=swap'
+          rel='stylesheet'
         />
         <meta charSet='utf-8'></meta>
         <link rel='icon' href='/favicon.ico'></link>
