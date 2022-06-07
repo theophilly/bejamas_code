@@ -28,12 +28,28 @@ const ProductItem: FunctionComponent<ComponentProps> = ({ product }) => {
     name,
     category,
     price,
+    bestseller,
   } = product;
 
   return (
     <Box>
       <Box
         sx={{
+          ...(bestseller && {
+            '::after': {
+              ...theme.typography.flex,
+              fontSize: '.8rem',
+              content: '"Best Seller"',
+              position: 'absolute',
+              color: 'black',
+              top: 0,
+              left: 0,
+              width: '90px',
+              height: '25px',
+              background: 'white',
+              fontWeight: '700',
+            },
+          }),
           position: 'relative',
           height: '250px',
           width: '200px',
