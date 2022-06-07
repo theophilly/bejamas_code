@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, useTheme } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 
@@ -7,8 +13,17 @@ import AppState, { IArticle } from '../../store/type';
 
 const AddToCartButton = () => {
   const theme = useTheme();
+  const lowerScreen = useMediaQuery('(max-width:400px)');
   return (
-    <Button disableElevation variant='contained'>
+    <Button
+      sx={{
+        '@media (max-width: 400px)': {
+          width: '100%',
+        },
+      }}
+      disableElevation
+      variant='contained'
+    >
       Add to Cart
     </Button>
   );
@@ -19,7 +34,7 @@ export default function ProductDetails() {
   const {
     productReducer: { products: AllProducts },
   } = useSelector((state: AppState): AppState => state);
-
+  const lowerScreen = useMediaQuery('(max-width:500px)');
   const [product] = useState<IArticle>(AllProducts[0]);
 
   return (
@@ -34,7 +49,7 @@ export default function ProductDetails() {
         <Typography sx={{ ...theme.typography.title1 }}>
           {product.name}
         </Typography>
-        <AddToCartButton />
+        {!lowerScreen && <AddToCartButton />}
       </Box>
       <Box
         sx={{
@@ -54,12 +69,18 @@ export default function ProductDetails() {
         }}
       >
         <Image
+          alt={product.image.alt}
           objectPosition='bottom'
           objectFit='cover'
           layout='fill'
           src={product.image.src}
         />
       </Box>
+      {lowerScreen && (
+        <Box sx={{ ...theme.typography.flex, mt: '15px' }}>
+          <AddToCartButton />
+        </Box>
+      )}
       {/* lower */}
       <Box
         sx={{
@@ -120,7 +141,13 @@ export default function ProductDetails() {
           </Typography>
           <Box sx={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
             {product.details?.recommendations.map((item, index) => (
-              <Image height={160} width={120} key={index} src={item.src} />
+              <Image
+                alt={item.alt}
+                height={160}
+                width={120}
+                key={index}
+                src={item.src}
+              />
             ))}
           </Box>
 

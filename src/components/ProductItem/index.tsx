@@ -44,6 +44,9 @@ const ProductItem: FunctionComponent<ComponentProps> = ({ product }) => {
         }}
       >
         <Image
+          alt={product.image.alt}
+          width={300}
+          height={100}
           objectPosition='bottom'
           objectFit='cover'
           layout='fill'

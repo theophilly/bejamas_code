@@ -85,7 +85,7 @@ const Header: FunctionComponent = () => {
         <Image height={20} width={130} src='./Group.png' />
       </Box>
 
-      <Box>
+      <Box mr={1}>
         <ButtonBase
           aria-describedby={id}
           onClick={products.length > 0 ? handleClick : () => {}}
